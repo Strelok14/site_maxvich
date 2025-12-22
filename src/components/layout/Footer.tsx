@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
           {/* О компании */}
           <div>
             <h3 className="text-xl font-bold mb-4">
-              <span className="text-primary-500">Rem</span>-Maxvich
+              <span className="text-white">Rem</span>-Maxvich
             </h3>
             <p className="text-gray-300 text-sm mb-4">
               Профессиональный ремонт квартир и домов под ключ в Нижнем Новгороде.

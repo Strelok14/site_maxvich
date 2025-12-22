@@ -62,6 +62,5 @@ export const NAVIGATION_LINKS = [
   { href: "#portfolio", label: "Проекты" },
   { href: "#calculator", label: "Стоимость" },
   { href: "#services", label: "Услуги" },
-  { href: "#reviews", label: "Отзывы" },
   { href: "#contacts", label: "Контакты" },
 ] as const;

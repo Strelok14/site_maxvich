@@ -1,17 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { SERVICE_CATEGORIES } from "@/data/services";
 import { ArrowRight } from "lucide-react";
 
-type ServiceCategoryId = (typeof SERVICE_CATEGORIES)[number]["id"];
+type Service = {
+  id: string;
+  title: string;
+  description?: string;
+  price?: string;
+  imageUrl?: string;
+  category?: string;
+};
 
 export const ServicesSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<ServiceCategoryId>(SERVICE_CATEGORIES[0].id);
-  const current = SERVICE_CATEGORIES.find((c) => c.id === activeTab) ?? SERVICE_CATEGORIES[0];
+  const [services, setServices] = useState<Service[]>([]);
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/api/services');
+        if (res.ok) {
+          const data = await res.json();
+          setServices(data);
+        }
+      } catch (err) {
+        console.error('Error loading services', err);
+      }
+    };
+    load();
+  }, []);
+
+  const categories = [
+    { id: 'all', label: 'Все услуги' },
+    { id: 'complex', label: 'Комплексный ремонт' },
+    { id: 'rooms', label: 'Ремонт помещений' },
+    { id: 'works', label: 'Отдельные работы' },
+  ];
+
+  const current = activeCategory === 'all' ? services : services.filter(s => (s.category || 'other') === activeCategory);
 
   return (
     <Section id="services" className="bg-gradient-to-b from-white to-gray-50">
@@ -28,12 +58,12 @@ export const ServicesSection: React.FC = () => {
 
         {/* Табы */}
         <div className="flex flex-wrap gap-3 mb-8">
-          {SERVICE_CATEGORIES.map((tab) => (
+          {categories.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveCategory(tab.id)}
               className={`rounded-full border-2 px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                activeTab === tab.id
+                activeCategory === tab.id
                   ? "border-secondary-800 bg-secondary-800 text-white shadow-lg"
                   : "border-gray-300 text-gray-700 hover:border-secondary-600 hover:bg-gray-50"
               }`}
@@ -45,7 +75,7 @@ export const ServicesSection: React.FC = () => {
 
         {/* Сетка услуг с изображениями */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {current.services.map((service, index) => (
+          {current.map((service, index) => (
             <div
               key={service.id}
               className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer aspect-[3/4]"
@@ -53,7 +83,9 @@ export const ServicesSection: React.FC = () => {
             >
               {/* Фоновое изображение или градиент */}
               <div className="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-600">
-                {/* Здесь будет изображение когда добавите */}
+                {service.imageUrl && (
+                  <img src={service.imageUrl} className="w-full h-full object-cover" />
+                )}
               </div>
               
               {/* Оверлей градиент */}
@@ -72,7 +104,6 @@ export const ServicesSection: React.FC = () => {
                     {service.price}
                   </span>
                   <button className="flex items-center gap-2 text-sm font-semibold hover:gap-3 transition-all duration-300">
-                    Подробнее
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -94,8 +125,8 @@ export const ServicesSection: React.FC = () => {
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
-                  variant="secondary"
-                  className="bg-white text-primary-600 hover:bg-white/90 font-bold"
+                  variant="outline"
+                  className="border-2 border-white text-white hover:bg-white/10 font-bold"
                   size="lg"
                   href="#contacts"
                 >

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -21,11 +21,30 @@ export default function AdminLoginPage() {
     // Простая проверка логина и пароля
     if (username === 'adminmaxrem' && password === 'maxrem2025') {
       // Сохраняем токен в localStorage
-      localStorage.setItem('adminToken', 'authenticated');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('adminToken', 'authenticated');
+      }
       router.push('/adminmaxrem/dashboard');
     } else {
       setError('Неверный логин или пароль');
       setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('adminToken');
+      if (token === 'authenticated') {
+        router.push('/adminmaxrem/dashboard');
+      }
+    }
+  }, [router]);
+
+  const enterAdmin = () => {
+    setIsLoading(true);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('adminToken', 'authenticated');
+      router.push('/adminmaxrem/dashboard');
     }
   };
 
@@ -85,12 +104,6 @@ export default function AdminLoginPage() {
               {isLoading ? 'Вход...' : 'Войти'}
             </Button>
           </form>
-
-          <div className="mt-6 text-center text-sm text-gray-500">
-            <p>Тестовые данные для входа:</p>
-            <p className="font-mono mt-1">Логин: adminmaxrem</p>
-            <p className="font-mono">Пароль: maxrem2025</p>
-          </div>
         </div>
       </Container>
     </div>

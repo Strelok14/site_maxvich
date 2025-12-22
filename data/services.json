@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Ебля миши",
+    "description": "Комплексная прочистка ануса",
+    "price": "10 копееек",
+    "imageUrl": "/uploads/projects/1766429028146-1014x892_1_e73d525c32cec1fe535de0731aec3d811014x892_0xFIIcyqOG_5715892750036286304.png",
+    "category": "rooms",
+    "id": "1766429029065",
+    "createdAt": "2025-12-22T18:43:49.065Z",
+    "updatedAt": "2025-12-22T18:43:49.065Z"
+  },
+  {
+    "title": "Ремонт хлеборезки",
+    "description": "Ремонт хлеборезки любого типа",
+    "price": "6есценно",
+    "imageUrl": "/uploads/projects/1766427560378-image.png",
+    "category": "complex",
+    "id": "1766427561622",
+    "createdAt": "2025-12-22T18:19:21.622Z",
+    "updatedAt": "2025-12-22T18:27:04.979Z"
+  }
+]
