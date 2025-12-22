@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/calculator-config/route": "app/api/calculator-config/route.js",
+  "/api/leads/[id]/route": "app/api/leads/[id]/route.js",
+  "/api/leads/route": "app/api/leads/route.js",
+  "/api/projects/[id]/route": "app/api/projects/[id]/route.js",
+  "/api/projects/route": "app/api/projects/route.js",
+  "/api/upload/route": "app/api/upload/route.js",
+  "/page": "app/page.js",
+  "/adminmaxrem/dashboard/page": "app/adminmaxrem/dashboard/page.js",
+  "/adminmaxrem/calculator-settings/page": "app/adminmaxrem/calculator-settings/page.js",
+  "/adminmaxrem/leads/page": "app/adminmaxrem/leads/page.js",
+  "/adminmaxrem/page": "app/adminmaxrem/page.js",
+  "/adminmaxrem/portfolio/page": "app/adminmaxrem/portfolio/page.js"
+}

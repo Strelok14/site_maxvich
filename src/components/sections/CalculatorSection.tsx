@@ -16,7 +16,7 @@ const loadScript = (src: string) =>
     const existing = document.querySelector(`script[src="${src}"]`) as HTMLScriptElement | null;
 
     if (existing) {
-      if (existing.dataset.loaded === "true" || existing.readyState === "complete") {
+      if (existing.dataset.loaded === "true") {
         resolve();
         return;
       }

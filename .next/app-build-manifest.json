@@ -1,0 +1,77 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/app/_not-found/page-2aa098ca6bcf1faa.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/css/7986e98fbf881404.css",
+      "static/chunks/app/layout-707deb846f4b77ab.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/851-4b7230f426f3d0c3.js",
+      "static/chunks/145-5064ec030359ba41.js",
+      "static/chunks/121-1e02815bb81bcddb.js",
+      "static/chunks/app/page-b70b21ed5f7a853e.js"
+    ],
+    "/adminmaxrem/dashboard/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/851-4b7230f426f3d0c3.js",
+      "static/chunks/app/adminmaxrem/dashboard/page-70762531c77e06a2.js"
+    ],
+    "/adminmaxrem/layout": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/app/adminmaxrem/layout-4ca3043916537f9a.js"
+    ],
+    "/adminmaxrem/calculator-settings/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/851-4b7230f426f3d0c3.js",
+      "static/chunks/app/adminmaxrem/calculator-settings/page-27751d2a366ae227.js"
+    ],
+    "/adminmaxrem/leads/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/851-4b7230f426f3d0c3.js",
+      "static/chunks/app/adminmaxrem/leads/page-b6f5486721ed9ada.js"
+    ],
+    "/adminmaxrem/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/851-4b7230f426f3d0c3.js",
+      "static/chunks/app/adminmaxrem/page-4a0f94f83e94248f.js"
+    ],
+    "/adminmaxrem/portfolio/page": [
+      "static/chunks/webpack-d94ee9e068dcf5dd.js",
+      "static/chunks/fd9d1056-c96c49782430d626.js",
+      "static/chunks/966-b31e71f406e16035.js",
+      "static/chunks/main-app-8b6c8dd04f99fc96.js",
+      "static/chunks/851-4b7230f426f3d0c3.js",
+      "static/chunks/145-5064ec030359ba41.js",
+      "static/chunks/app/adminmaxrem/portfolio/page-d0d11ec937c2f6dd.js"
+    ]
+  }
+}

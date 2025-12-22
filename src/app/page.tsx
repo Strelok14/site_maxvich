@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AdvantagesSection } from "@/components/sections/AdvantagesSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { CalculatorSection } from "@/components/sections/CalculatorSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
@@ -14,8 +15,8 @@ export default function Home() {
       <HeroSection />
       <AdvantagesSection />
       <ServicesSection />
+      <PortfolioSection />
       <CalculatorSection />
-      {/* Портфолио временно скрыто по просьбе клиента */}
       <ContactSection />
       <FloatingActionButton />
       <Footer />

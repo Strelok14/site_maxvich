@@ -10,11 +10,10 @@
 /coverage
 
 # next.js
-/.next/
 /out/
 
 # production
-/build
+# /.next/ and /build are included in the build branch
 
 # misc
 .DS_Store
