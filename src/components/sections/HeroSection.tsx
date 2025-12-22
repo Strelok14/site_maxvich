@@ -28,7 +28,7 @@ export const HeroSection: React.FC = () => {
       
       {/* Анимированные градиентные сферы */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-primary-500/30 to-orange-500/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-primary-500/30 to-secondary-500/30 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-secondary-500/25 to-blue-500/25 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse-glow"></div>
       </div>
@@ -38,7 +38,7 @@ export const HeroSection: React.FC = () => {
           {/* Левая часть - контент */}
           <div className="text-white space-y-4">
             {/* Бейдж */}
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-orange-500/20 rounded-full border border-primary-500/30 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full border border-primary-500/30 backdrop-blur-sm">
               <Award className="w-4 h-4 text-primary-400" />
               <span className="text-primary-300 text-sm font-semibold">
                 Профессиональный ремонт с 2016 года
@@ -68,7 +68,7 @@ export const HeroSection: React.FC = () => {
                 { icon: CheckCircle2, text: "От 650₽/м²" },
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-2 group">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/20 to-orange-500/20 flex items-center justify-center border border-primary-500/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/20 to-secondary-500/20 flex items-center justify-center border border-primary-500/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                     <item.icon className="w-4 h-4 text-primary-400" />
                   </div>
                   <span className="text-xs font-medium text-gray-300 leading-tight">{item.text}</span>
@@ -111,7 +111,7 @@ export const HeroSection: React.FC = () => {
             {/* Статистика */}
             <div className="flex flex-wrap items-center gap-10 pt-4 border-t border-white/10 max-w-5xl">
               {[
-                { value: "120+", label: "Проектов" },
+                { value: "80+", label: "Проектов" },
                 { value: "4.9", label: "Рейтинг" },
                 { value: "8+", label: "Лет опыта" },
               ].map((stat, index) => (

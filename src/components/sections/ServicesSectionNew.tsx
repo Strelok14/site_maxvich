@@ -6,10 +6,29 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 type ServiceCategoryId = (typeof SERVICE_CATEGORIES)[number]["id"];
 
-export const ServicesSection: React.FC = () => {
+// Временные изображения для услуг - можно заменить на реальные
+const serviceImages: Record<number, string> = {
+  1: "/images/services/remont-pod-kluch.jpg",
+  2: "/images/services/kosmeticheskiy.jpg",
+  4: "/images/services/vannaya.jpg",
+  5: "/images/services/kuhnya.jpg",
+  6: "/images/services/shtukaturka.jpg",
+  7: "/images/services/plitka.jpg",
+  8: "/images/services/styazhka.jpg",
+  9: "/images/services/pokraska.jpg",
+  10: "/images/services/spalnya.jpg",
+  11: "/images/services/detskaya.jpg",
+  12: "/images/services/dizayn-proekt.jpg",
+  13: "/images/services/premium.jpg",
+  14: "/images/services/kapitalnyy.jpg",
+  15: "/images/services/dom.jpg",
+};
+
+export const ServicesSectionNew: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ServiceCategoryId>(SERVICE_CATEGORIES[0].id);
   const current = SERVICE_CATEGORIES.find((c) => c.id === activeTab) ?? SERVICE_CATEGORIES[0];
 
@@ -54,6 +73,12 @@ export const ServicesSection: React.FC = () => {
               {/* Фоновое изображение или градиент */}
               <div className="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-600">
                 {/* Здесь будет изображение когда добавите */}
+                {/* <Image 
+                  src={serviceImages[service.id] || "/images/placeholder.jpg"} 
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                /> */}
               </div>
               
               {/* Оверлей градиент */}
@@ -83,7 +108,7 @@ export const ServicesSection: React.FC = () => {
 
         {/* Блок "Не знаете с чего начать" */}
         <div className="mt-16">
-          <div className="bg-gradient-to-r from-primary-500 to-secondary-500 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
+          <div className="bg-gradient-to-r from-primary-500 to-orange-500 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="flex-1">
                 <p className="text-sm uppercase tracking-wider text-white/90 mb-2">Не знаете с чего начать?</p>

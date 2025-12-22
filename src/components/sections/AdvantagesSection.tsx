@@ -51,7 +51,7 @@ export const AdvantagesSection: React.FC = () => {
                 className="text-center group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-50 to-orange-50 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
+                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
                   <Icon className="w-10 h-10 text-primary-500 group-hover:text-primary-600 transition-colors" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-primary-600 transition-colors">
@@ -68,7 +68,7 @@ export const AdvantagesSection: React.FC = () => {
         {/* Статистика */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-10 bg-white rounded-3xl shadow-xl border border-gray-100">
           {[
-            { value: "120+", label: "Выполненных объектов", color: "from-primary-500 to-orange-500" },
+            { value: "80+", label: "Выполненных объектов", color: "from-primary-500 to-secondary-500" },
             { value: "98%", label: "Довольных клиентов", color: "from-green-500 to-emerald-500" },
             { value: "24/7", label: "Поддержка клиентов", color: "from-secondary-500 to-blue-500" },
           ].map((stat, index) => (

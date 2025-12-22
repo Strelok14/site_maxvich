@@ -103,19 +103,19 @@ export const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Информация</h3>
             <div className="flex flex-col space-y-2 text-sm">
               <Link
-                href="#"
+                href="/privacy"
                 className="text-gray-300 hover:text-primary-500 transition-colors"
               >
                 Политика конфиденциальности
               </Link>
               <Link
-                href="#"
+                href="/terms"
                 className="text-gray-300 hover:text-primary-500 transition-colors"
               >
                 Договор оферты
               </Link>
               <Link
-                href="#"
+                href="/requisites"
                 className="text-gray-300 hover:text-primary-500 transition-colors"
               >
                 Реквизиты

@@ -19,7 +19,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, description, category, area, duration, price, imageBefore, imageAfter } = body;
+    const { title, description, category, area, duration, price, imageBefore, imageAfter, videos } = body;
 
     if (!title || !imageBefore || !imageAfter) {
       return NextResponse.json(
@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
       price: price || undefined,
       imageBefore,
       imageAfter,
+      videos: Array.isArray(videos) ? videos : videos ? [videos] : undefined,
     });
 
     return NextResponse.json({ success: true, project }, { status: 201 });

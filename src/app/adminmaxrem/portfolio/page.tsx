@@ -32,6 +32,7 @@ export default function PortfolioManagementPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [uploadingBefore, setUploadingBefore] = useState(false);
   const [uploadingAfter, setUploadingAfter] = useState(false);
+  const [uploadingVideo, setUploadingVideo] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -42,6 +43,7 @@ export default function PortfolioManagementPage() {
     price: 0,
     imageBefore: '',
     imageAfter: '',
+    video: '',
   });
 
   useEffect(() => {
@@ -67,11 +69,12 @@ export default function PortfolioManagementPage() {
     }
   };
 
-  const handleFileUpload = async (file: File, type: 'before' | 'after') => {
+  const handleFileUpload = async (file: File, type: 'before' | 'after' | 'video') => {
     const formData = new FormData();
     formData.append('file', file);
 
-    const setUploading = type === 'before' ? setUploadingBefore : setUploadingAfter;
+    const setUploading =
+      type === 'before' ? setUploadingBefore : type === 'after' ? setUploadingAfter : setUploadingVideo;
     setUploading(true);
 
     try {
@@ -82,10 +85,14 @@ export default function PortfolioManagementPage() {
 
       if (response.ok) {
         const data = await response.json();
-        setFormData(prev => ({
-          ...prev,
-          [type === 'before' ? 'imageBefore' : 'imageAfter']: data.path,
-        }));
+        if (type === 'before' || type === 'after') {
+          setFormData(prev => ({
+            ...prev,
+            [type === 'before' ? 'imageBefore' : 'imageAfter']: data.path,
+          }));
+        } else {
+          setFormData(prev => ({ ...prev, video: data.path }));
+        }
       } else {
         alert('Ошибка при загрузке файла');
       }
@@ -108,10 +115,13 @@ export default function PortfolioManagementPage() {
       
       const method = editingProject ? 'PATCH' : 'POST';
 
+      const payload: any = { ...formData };
+      if (formData.video) payload.videos = [formData.video];
+
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -141,6 +151,7 @@ export default function PortfolioManagementPage() {
       price: project.price || 0,
       imageBefore: project.imageBefore,
       imageAfter: project.imageAfter,
+      video: project.videos && project.videos.length > 0 ? project.videos[0] : '',
     });
     setIsModalOpen(true);
   };
@@ -256,6 +267,14 @@ export default function PortfolioManagementPage() {
                     </span>
                   </div>
                 </div>
+                {project.videos && project.videos.length > 0 && (
+                  <div className="p-2">
+                    <video controls className="w-full h-40 object-cover rounded">
+                      <source src={project.videos[0]} />
+                      Ваш браузер не поддерживает видео.
+                    </video>
+                  </div>
+                )}
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
                   <p className="text-sm text-gray-600 mb-2">{project.description}</p>
@@ -429,6 +448,30 @@ export default function PortfolioManagementPage() {
                       </div>
                     )}
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Видео (опционально)
+                  </label>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handleFileUpload(file, 'video');
+                    }}
+                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                  />
+                  {uploadingVideo && <p className="text-sm text-gray-500 mt-2">Загрузка...</p>}
+                  {formData.video && (
+                    <div className="mt-2">
+                      <video controls className="w-full h-40 object-cover rounded">
+                        <source src={formData.video} />
+                        Ваш браузер не поддерживает видео.
+                      </video>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex justify-end gap-3 pt-4">

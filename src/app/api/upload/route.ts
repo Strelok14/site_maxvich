@@ -15,16 +15,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Проверка типа файла
-    if (!file.type.startsWith('image/')) {
+    // Проверка типа файла и выбор папки для сохранения
+    const isImage = file.type.startsWith('image/');
+    const isVideo = file.type.startsWith('video/');
+    if (!isImage && !isVideo) {
       return NextResponse.json(
-        { error: 'Можно загружать только изображения' },
+        { error: 'Можно загружать только изображения или видео' },
         { status: 400 }
       );
     }
 
-    // Создаем папку для загрузок если её нет
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'projects');
+    const uploadDir = isVideo
+      ? path.join(process.cwd(), 'public', 'uploads', 'videos')
+      : path.join(process.cwd(), 'public', 'uploads', 'projects');
     if (!existsSync(uploadDir)) {
       await mkdir(uploadDir, { recursive: true });
     }
@@ -42,7 +45,9 @@ export async function POST(request: NextRequest) {
     await writeFile(filePath, buffer);
 
     // Возвращаем путь к файлу
-    const publicPath = `/uploads/projects/${fileName}`;
+    const publicPath = isVideo
+      ? `/uploads/videos/${fileName}`
+      : `/uploads/projects/${fileName}`;
 
     return NextResponse.json({ 
       success: true, 

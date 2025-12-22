@@ -13,6 +13,7 @@ export interface Project {
   price?: number;
   imageBefore: string;
   imageAfter: string;
+  videos?: string[];
   createdAt: string;
   updatedAt: string;
 }
