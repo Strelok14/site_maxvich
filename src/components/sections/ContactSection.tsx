@@ -62,6 +62,21 @@ export const ContactSection: React.FC = () => {
                   </Button>
                 </div>
               </div>
+
+              <div className="mt-6">
+                <p className="text-sm font-semibold text-gray-800 mb-3">QR для ВКонтакте</p>
+                <p className="text-sm text-gray-600 mb-2">Сканируйте, чтобы открыть профиль в VK</p>
+                <a href={CONTACT_INFO.vk} target="_blank" rel="noreferrer" className="inline-block">
+                  <img
+                    src={typeof CONTACT_INFO.vk === 'string'
+                      ? `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(CONTACT_INFO.vk)}`
+                      : '/images/vk-qr.png'
+                    }
+                    alt="QR VK"
+                    className="w-40 h-40 object-contain rounded-lg border"
+                  />
+                </a>
+              </div>
             </Card>
 
             <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-6">

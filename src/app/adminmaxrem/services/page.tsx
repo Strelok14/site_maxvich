@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
+import Image from 'next/image';
 
 interface Service {
   id: string;
@@ -48,6 +49,8 @@ export default function ServicesAdmin() {
   const handleUpload = async (file: File) => {
     const fd = new FormData();
     fd.append('file', file);
+    // пометка для API, чтобы сохранить изображения в папку services
+    fd.append('type', 'services');
     setUploading(true);
     try {
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
@@ -59,7 +62,11 @@ export default function ServicesAdmin() {
     setUploading(false);
   };
 
-  const openCreate = () => { setForm({ title: '', description: '', price: '', imageUrl: '' }); setEditing(null); setIsModal(true); };
+  const openCreate = () => {
+    setForm({ title: '', description: '', price: '', imageUrl: '', category: 'all' });
+    setEditing(null);
+    setIsModal(true);
+  };
 
   const submit = async (e: any) => {
     e.preventDefault();
@@ -106,7 +113,17 @@ export default function ServicesAdmin() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {items.map(it => (
               <Card key={it.id} className="overflow-hidden">
-                {it.imageUrl && <img src={it.imageUrl} alt={it.title} className="w-full h-48 object-cover" />}
+                {/* {it.imageUrl && (
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={it.imageUrl}
+                      alt={it.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                )} */}
                 <div className="p-4">
                   <h3 className="font-semibold text-lg">{it.title}</h3>
                   <p className="text-sm text-gray-600">{it.description}</p>
@@ -155,7 +172,17 @@ export default function ServicesAdmin() {
                 <label className="block text-sm font-medium">Фото (опционально)</label>
                 <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) handleUpload(f); }} />
                 {uploading && <p className="text-sm text-gray-500">Загрузка...</p>}
-                {form.imageUrl && <img src={form.imageUrl} alt="preview" className="mt-2 w-48 h-32 object-cover" />}
+                {/* {form.imageUrl && (
+                  <div className="mt-2 relative w-48 h-32">
+                    <Image
+                      src={form.imageUrl}
+                      alt="Предпросмотр"
+                      fill
+                      className="object-cover rounded"
+                      sizes="192px"
+                    />
+                  </div>
+                )} */}
               </div>
               <div className="flex justify-end gap-3 pt-4">
                 <Button type="button" variant="outline" onClick={() => setIsModal(false)}>Отмена</Button>

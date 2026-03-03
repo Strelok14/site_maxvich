@@ -65,7 +65,7 @@ export const HeroSection: React.FC = () => {
                 { icon: Award, text: "Опыт более 8 лет" },
                 { icon: Shield, text: "Гарантия 36 месяцев" },
                 { icon: CheckCircle2, text: "Бесплатный замер" },
-                { icon: CheckCircle2, text: "От 650₽/м²" },
+                { icon: CheckCircle2, text: "Качественная работа" },
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-2 group">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/20 to-secondary-500/20 flex items-center justify-center border border-primary-500/30 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">

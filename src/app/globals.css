@@ -95,7 +95,7 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-accent-400 to-accent-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600;
   }
   
   .gradient-border {
@@ -116,6 +116,27 @@
   
   .btn-glow {
     @apply shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40;
+  }
+  
+  /* Градиентное свечение для кнопок */
+  .btn-gradient-glow {
+    position: relative;
+    z-index: 0;
+  }
+  .btn-gradient-glow::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #6366f1 0%, #f97316 100%);
+    filter: blur(16px);
+    opacity: 0.35;
+    z-index: -1;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .btn-gradient-glow:hover::before {
+    opacity: 0.55;
+    transform: scale(1.03);
   }
   
   /* Плавные анимации */

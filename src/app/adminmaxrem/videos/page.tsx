@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
+import Image from 'next/image';
 
 interface Video {
   id: string;
@@ -325,10 +326,12 @@ export default function VideoManagementPage() {
                   {uploadingThumbnail && <p className="text-sm text-gray-500 mt-2">Загрузка...</p>}
                   {formData.thumbnailUrl && (
                     <div className="mt-2 relative h-32">
-                      <img
+                      <Image
                         src={formData.thumbnailUrl}
                         alt="Превью"
-                        className="w-full h-full object-cover rounded"
+                        fill
+                        className="object-cover rounded"
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </div>
                   )}

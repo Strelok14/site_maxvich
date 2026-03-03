@@ -19,11 +19,11 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, description, category, area, duration, price, imageBefore, imageAfter, videos } = body;
+    const { title, description, category, area, duration, price, rooms, imageBefore, imageAfter, images, videos } = body;
 
-    if (!title || !imageBefore || !imageAfter) {
+    if (!title) {
       return NextResponse.json(
-        { error: 'Заполните обязательные поля' },
+        { error: 'Заполните обязательные поля: title' },
         { status: 400 }
       );
     }
@@ -35,8 +35,10 @@ export async function POST(request: NextRequest) {
       area: area || 0,
       duration: duration || '',
       price: price || undefined,
-      imageBefore,
-      imageAfter,
+      rooms: rooms || undefined,
+      imageBefore: imageBefore || undefined,
+      imageAfter: imageAfter || undefined,
+      images: Array.isArray(images) ? images : images ? [images] : undefined,
       videos: Array.isArray(videos) ? videos : videos ? [videos] : undefined,
     });
 

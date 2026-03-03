@@ -17,10 +17,13 @@ interface Project {
   area: number;
   duration: string;
   price?: number;
-  imageBefore: string;
-  imageAfter: string;
+  rooms?: number;
+  imageBefore?: string;
+  imageAfter?: string;
+  images?: string[];
   videos?: string[];
   createdAt: string;
+  updatedAt?: string;
 }
 
 export default function PortfolioManagementPage() {
@@ -34,6 +37,7 @@ export default function PortfolioManagementPage() {
   const [uploadingBefore, setUploadingBefore] = useState(false);
   const [uploadingAfter, setUploadingAfter] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -42,8 +46,10 @@ export default function PortfolioManagementPage() {
     area: 0,
     duration: '',
     price: 0,
+    rooms: 0,
     imageBefore: '',
     imageAfter: '',
+    images: [] as string[],
     video: '',
   });
 
@@ -70,23 +76,27 @@ export default function PortfolioManagementPage() {
     }
   };
 
-  const handleFileUpload = async (file: File, type: 'before' | 'after' | 'video') => {
-    const formData = new FormData();
-    formData.append('file', file);
+  const handleFileUpload = async (file: File, type: 'before' | 'after' | 'video' | 'gallery') => {
+    const formDataObj = new FormData();
+    formDataObj.append('file', file);
 
-    const setUploading =
-      type === 'before' ? setUploadingBefore : type === 'after' ? setUploadingAfter : setUploadingVideo;
+    const setUploading = type === 'before' ? setUploadingBefore : type === 'after' ? setUploadingAfter : type === 'video' ? setUploadingVideo : setUploadingGallery;
     setUploading(true);
 
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
-        body: formData,
+        body: formDataObj,
       });
 
       if (response.ok) {
         const data = await response.json();
-        if (type === 'before' || type === 'after') {
+        if (type === 'gallery') {
+          setFormData(prev => ({
+            ...prev,
+            images: [...prev.images, data.path],
+          }));
+        } else if (type === 'before' || type === 'after') {
           setFormData(prev => ({
             ...prev,
             [type === 'before' ? 'imageBefore' : 'imageAfter']: data.path,
@@ -150,8 +160,10 @@ export default function PortfolioManagementPage() {
       area: project.area,
       duration: project.duration,
       price: project.price || 0,
-      imageBefore: project.imageBefore,
-      imageAfter: project.imageAfter,
+      rooms: project.rooms || 0,
+      imageBefore: project.imageBefore || '',
+      imageAfter: project.imageAfter || '',
+      images: project.images || [],
       video: project.videos && project.videos.length > 0 ? project.videos[0] : '',
     });
     setIsModalOpen(true);
@@ -181,8 +193,11 @@ export default function PortfolioManagementPage() {
       area: 0,
       duration: '',
       price: 0,
+      rooms: 0,
       imageBefore: '',
       imageAfter: '',
+      images: [],
+      video: '',
     });
   };
 
@@ -245,28 +260,32 @@ export default function PortfolioManagementPage() {
             {projects.map((project) => (
               <Card key={project.id} className="overflow-hidden">
                 <div className="grid grid-cols-2 gap-2 p-2">
-                  <div className="relative h-40">
-                    <Image
-                      src={project.imageBefore}
-                      alt="До"
-                      fill
-                      className="object-cover rounded"
-                    />
-                    <span className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                      До
-                    </span>
-                  </div>
-                  <div className="relative h-40">
-                    <Image
-                      src={project.imageAfter}
-                      alt="После"
-                      fill
-                      className="object-cover rounded"
-                    />
-                    <span className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                      После
-                    </span>
-                  </div>
+                  {project.imageBefore && (
+                    <div className="relative h-40">
+                      <Image
+                        src={project.imageBefore as string}
+                        alt="До"
+                        fill
+                        className="object-cover rounded"
+                      />
+                      <span className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                        До
+                      </span>
+                    </div>
+                  )}
+                  {project.imageAfter && (
+                    <div className="relative h-40">
+                      <Image
+                        src={project.imageAfter as string}
+                        alt="После"
+                        fill
+                        className="object-cover rounded"
+                      />
+                      <span className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                        После
+                      </span>
+                    </div>
+                  )}
                 </div>
                 {project.videos && project.videos.length > 0 && (
                   <div className="p-2">
@@ -354,7 +373,16 @@ export default function PortfolioManagementPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option>Ремонт квартиры</option>
-                      <option>Ремонт дома</option>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Количество комнат
+                      </label>
+                      <Input
+                        type="number"
+                        value={formData.rooms}
+                        onChange={(e) => setFormData({ ...formData, rooms: Number(e.target.value) })}
+                      />
+                    </div>
                       <option>Ремонт офиса</option>
                       <option>Косметический ремонт</option>
                       <option>Капитальный ремонт</option>
@@ -369,6 +397,16 @@ export default function PortfolioManagementPage() {
                       type="number"
                       value={formData.area}
                       onChange={(e) => setFormData({ ...formData, area: Number(e.target.value) })}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Количество комнат
+                    </label>
+                    <Input
+                      type="number"
+                      value={formData.rooms}
+                      onChange={(e) => setFormData({ ...formData, rooms: Number(e.target.value) })}
                     />
                   </div>
                 </div>
@@ -400,7 +438,7 @@ export default function PortfolioManagementPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Фото &quot;До&quot; *
+                      Фото «До» (опционально)
                     </label>
                     <input
                       type="file"
@@ -426,7 +464,7 @@ export default function PortfolioManagementPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Фото &quot;После&quot; *
+                      Фото «После» (опционально)
                     </label>
                     <input
                       type="file"
@@ -449,6 +487,59 @@ export default function PortfolioManagementPage() {
                       </div>
                     )}
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Галерея — несколько фотографий (опционально)
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => {
+                      const files = e.target.files;
+                      if (files) {
+                        Array.from(files).forEach(file => {
+                          handleFileUpload(file, 'gallery');
+                        });
+                      }
+                    }}
+                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Можно загрузить несколько фото сразу</p>
+                  {uploadingGallery && <p className="text-sm text-gray-500 mt-2">Загрузка...</p>}
+                  {formData.images.length > 0 && (
+                    <div className="mt-3">
+                      <p className="text-sm font-medium text-gray-700 mb-2">Загруженные фото ({formData.images.length}):</p>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                        {formData.images.map((img, idx) => (
+                          <div key={idx} className="relative group">
+                            <div className="relative h-24">
+                              <Image
+                                src={img}
+                                alt={`Фото ${idx + 1}`}
+                                fill
+                                className="object-cover rounded"
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setFormData(prev => ({
+                                  ...prev,
+                                  images: prev.images.filter((_, i) => i !== idx),
+                                }));
+                              }}
+                              className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div>

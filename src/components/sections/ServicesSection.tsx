@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 type Service = {
   id: string;
@@ -84,7 +85,14 @@ export const ServicesSection: React.FC = () => {
               {/* Фоновое изображение или градиент */}
               <div className="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-600">
                 {service.imageUrl && (
-                  <img src={service.imageUrl} className="w-full h-full object-cover" />
+                  <Image
+                    src={service.imageUrl}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    priority={index < 2}
+                  />
                 )}
               </div>
               

@@ -25,9 +25,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // В standalone режиме используем data/uploads для постоянного хранилища
+    // Поддерживаем типы: 'projects' (по умолчанию), 'services', 'videos'
+    const requestedType = (formData.get('type') as string) || '';
     const uploadDir = isVideo
-      ? path.join(process.cwd(), 'public', 'uploads', 'videos')
-      : path.join(process.cwd(), 'public', 'uploads', 'projects');
+      ? path.join(process.cwd(), 'data', 'uploads', 'videos')
+      : requestedType === 'services'
+      ? path.join(process.cwd(), 'data', 'uploads', 'services')
+      : path.join(process.cwd(), 'data', 'uploads', 'projects');
     if (!existsSync(uploadDir)) {
       await mkdir(uploadDir, { recursive: true });
     }
@@ -44,10 +49,12 @@ export async function POST(request: NextRequest) {
     // Сохраняем файл
     await writeFile(filePath, buffer);
 
-    // Возвращаем путь к файлу
+    // Возвращаем путь к файлу для доступа через API
     const publicPath = isVideo
-      ? `/uploads/videos/${fileName}`
-      : `/uploads/projects/${fileName}`;
+      ? `/api/files/videos/${fileName}`
+      : requestedType === 'services'
+      ? `/api/files/services/${fileName}`
+      : `/api/files/projects/${fileName}`;
 
     return NextResponse.json({ 
       success: true, 

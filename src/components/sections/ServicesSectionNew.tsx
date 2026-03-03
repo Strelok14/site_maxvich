@@ -6,26 +6,26 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SERVICE_CATEGORIES } from "@/data/services";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 
 type ServiceCategoryId = (typeof SERVICE_CATEGORIES)[number]["id"];
 
-// Временные изображения для услуг - можно заменить на реальные
-const serviceImages: Record<number, string> = {
-  1: "/images/services/remont-pod-kluch.jpg",
-  2: "/images/services/kosmeticheskiy.jpg",
-  4: "/images/services/vannaya.jpg",
-  5: "/images/services/kuhnya.jpg",
-  6: "/images/services/shtukaturka.jpg",
-  7: "/images/services/plitka.jpg",
-  8: "/images/services/styazhka.jpg",
-  9: "/images/services/pokraska.jpg",
-  10: "/images/services/spalnya.jpg",
-  11: "/images/services/detskaya.jpg",
-  12: "/images/services/dizayn-proekt.jpg",
-  13: "/images/services/premium.jpg",
-  14: "/images/services/kapitalnyy.jpg",
-  15: "/images/services/dom.jpg",
+// Цветные градиенты для услуг (можно заменить на реальные изображения)
+const serviceGradients: Record<number, string> = {
+  1: "from-blue-600 to-blue-800",
+  2: "from-green-600 to-green-800",
+  3: "from-purple-600 to-purple-800",
+  4: "from-cyan-600 to-cyan-800",
+  5: "from-orange-600 to-orange-800",
+  6: "from-red-600 to-red-800",
+  7: "from-amber-600 to-amber-800",
+  8: "from-yellow-600 to-yellow-800",
+  9: "from-lime-600 to-lime-800",
+  10: "from-pink-600 to-pink-800",
+  11: "from-rose-600 to-rose-800",
+  12: "from-indigo-600 to-indigo-800",
+  13: "from-violet-600 to-violet-800",
+  14: "from-fuchsia-600 to-fuchsia-800",
+  15: "from-teal-600 to-teal-800",
 };
 
 export const ServicesSectionNew: React.FC = () => {
@@ -71,14 +71,7 @@ export const ServicesSectionNew: React.FC = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Фоновое изображение или градиент */}
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-600">
-                {/* Здесь будет изображение когда добавите */}
-                {/* <Image 
-                  src={serviceImages[service.id] || "/images/placeholder.jpg"} 
-                  alt={service.title}
-                  fill
-                  className="object-cover"
-                /> */}
+              <div className={`absolute inset-0 bg-gradient-to-b ${serviceGradients[service.id] || "from-gray-400 to-gray-700"}`}>
               </div>
               
               {/* Оверлей градиент */}

@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AdvantagesSection } from "@/components/sections/AdvantagesSection";
+import { WorkflowSection } from "@/components/sections/WorkflowSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { VideoSection } from "@/components/sections/VideoSection";
@@ -15,6 +16,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <AdvantagesSection />
+      <WorkflowSection />
       <ServicesSection />
       <PortfolioSection />
       <VideoSection />

@@ -11,8 +11,10 @@ export interface Project {
   area: number;
   duration: string;
   price?: number;
-  imageBefore: string;
-  imageAfter: string;
+  rooms?: number;
+  imageBefore?: string;
+  imageAfter?: string;
+  images?: string[];
   videos?: string[];
   createdAt: string;
   updatedAt: string;

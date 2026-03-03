@@ -1,22 +1,82 @@
 [
   {
-    "title": "Ебля миши",
-    "description": "Комплексная прочистка ануса",
-    "price": "10 копееек",
-    "imageUrl": "/uploads/projects/1766429028146-1014x892_1_e73d525c32cec1fe535de0731aec3d811014x892_0xFIIcyqOG_5715892750036286304.png",
-    "category": "rooms",
-    "id": "1766429029065",
-    "createdAt": "2025-12-22T18:43:49.065Z",
-    "updatedAt": "2025-12-22T18:43:49.065Z"
+    "title": "Капитальный ремонт квартиры",
+    "description": "Полная перепланировка, замена коммуникаций и чистовая отделка под ключ.",
+    "price": "от 7 500 ₽/м²",
+    "imageUrl": "/uploads/services/kapremont.jpg",
+    "category": "complex",
+    "id": "1766660001001",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
   },
   {
-    "title": "Ремонт хлеборезки",
-    "description": "Ремонт хлеборезки любого типа",
-    "price": "6есценно",
-    "imageUrl": "/uploads/projects/1766427560378-image.png",
+    "title": "Косметический ремонт",
+    "description": "Обновление отделки без изменения планировки: покраска, обои, замена покрытий.",
+    "price": "от 2 900 ₽/м²",
+    "imageUrl": "/uploads/services/kosmetik.jpg",
     "category": "complex",
-    "id": "1766427561622",
-    "createdAt": "2025-12-22T18:19:21.622Z",
-    "updatedAt": "2025-12-22T18:27:04.979Z"
+    "id": "1766660001002",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
+  },
+  {
+    "title": "Отделка новостройки",
+    "description": "Старт с черновой стадии до готового интерьера: стяжка, штукатурка, чистовая отделка.",
+    "price": "от 6 500 ₽/м²",
+    "imageUrl": "/uploads/services/novostroy.jpg",
+    "category": "complex",
+    "id": "1766660001003",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
+  },
+  {
+    "title": "Ремонт ванной под ключ",
+    "description": "Гидроизоляция, плитка, сантехника и подсветка с учётом вентиляции.",
+    "price": "от 85 000 ₽ за санузел",
+    "imageUrl": "/uploads/services/bathroom.jpg",
+    "category": "rooms",
+    "id": "1766660001004",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
+  },
+  {
+    "title": "Ремонт кухни",
+    "description": "Инженерия под технику, фартук, рабочие поверхности и освещение зонально.",
+    "price": "от 120 000 ₽",
+    "imageUrl": "/uploads/services/kitchen.jpg",
+    "category": "rooms",
+    "id": "1766660001005",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
+  },
+  {
+    "title": "Плиточные работы",
+    "description": "Ровная укладка керамогранита и плитки, подбор раскладки и затирки.",
+    "price": "от 1 100 ₽/м²",
+    "imageUrl": "/uploads/services/tile.jpg",
+    "category": "works",
+    "id": "1766660001006",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
+  },
+  {
+    "title": "Электромонтаж",
+    "description": "Проект розеточных групп, штробление, укладка кабеля и монтаж щита.",
+    "price": "от 650 ₽/точка",
+    "imageUrl": "/uploads/services/electro.jpg",
+    "category": "works",
+    "id": "1766660001007",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
+  },
+  {
+    "title": "Натяжные потолки",
+    "description": "Монтаж одноуровневых и многоуровневых полотен с интеграцией освещения.",
+    "price": "от 900 ₽/м²",
+    "imageUrl": "/uploads/services/ceiling.jpg",
+    "category": "works",
+    "id": "1766660001008",
+    "createdAt": "2025-12-25T00:00:00.000Z",
+    "updatedAt": "2025-12-25T00:00:00.000Z"
   }
 ]
