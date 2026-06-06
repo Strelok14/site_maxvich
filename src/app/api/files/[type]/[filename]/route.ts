@@ -5,10 +5,12 @@ import { existsSync } from 'fs';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { type: string; filename: string } }
+  context: { params: Promise<{ type: string; filename: string }> | { type: string; filename: string } }
 ) {
   try {
-    const { type, filename } = params;
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const { type, filename } = resolvedParams as { type: string; filename: string };
 
     // Валидация типа (только videos, projects или services)
     if (!['videos', 'projects', 'services'].includes(type)) {

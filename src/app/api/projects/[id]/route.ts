@@ -4,10 +4,12 @@ import { getProjectById, updateProject, deleteProject } from '@/lib/projects';
 // GET - получить проект по ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const project = getProjectById(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const project = getProjectById(resolvedParams.id);
 
     if (!project) {
       return NextResponse.json(
@@ -29,11 +31,13 @@ export async function GET(
 // PATCH - обновить проект
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
     const body = await request.json();
-    const project = updateProject(params.id, body);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const project = updateProject(resolvedParams.id, body);
 
     if (!project) {
       return NextResponse.json(
@@ -55,10 +59,12 @@ export async function PATCH(
 // DELETE - удалить проект
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const success = deleteProject(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const success = deleteProject(resolvedParams.id);
 
     if (!success) {
       return NextResponse.json(

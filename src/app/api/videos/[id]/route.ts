@@ -4,10 +4,12 @@ import { getVideoById, updateVideo, deleteVideo } from '@/lib/videos';
 // GET - получить видео по ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const video = getVideoById(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const video = getVideoById(resolvedParams.id);
 
     if (!video) {
       return NextResponse.json(
@@ -29,11 +31,13 @@ export async function GET(
 // PATCH - обновить видео
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
     const body = await request.json();
-    const video = updateVideo(params.id, body);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const video = updateVideo(resolvedParams.id, body);
 
     if (!video) {
       return NextResponse.json(
@@ -55,10 +59,12 @@ export async function PATCH(
 // DELETE - удалить видео
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const success = deleteVideo(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const success = deleteVideo(resolvedParams.id);
 
     if (!success) {
       return NextResponse.json(

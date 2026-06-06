@@ -4,7 +4,7 @@ import { updateLeadStatus, deleteLead } from '@/lib/db';
 // PATCH - обновить статус заявки
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
     const body = await request.json();
@@ -17,7 +17,9 @@ export async function PATCH(
       );
     }
 
-    const lead = updateLeadStatus(params.id, status);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const lead = updateLeadStatus(resolvedParams.id, status);
 
     if (!lead) {
       return NextResponse.json(
@@ -39,10 +41,12 @@ export async function PATCH(
 // DELETE - удалить заявку
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const success = deleteLead(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const success = deleteLead(resolvedParams.id);
 
     if (!success) {
       return NextResponse.json(

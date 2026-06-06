@@ -3,10 +3,12 @@ import { getServiceById, updateService, deleteService } from '@/lib/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const item = getServiceById(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const item = getServiceById(resolvedParams.id);
     if (!item) return NextResponse.json({ error: 'Не найдено' }, { status: 404 });
     return NextResponse.json(item);
   } catch (err) {
@@ -17,11 +19,13 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
     const body = await request.json();
-    const item = updateService(params.id, body);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const item = updateService(resolvedParams.id, body);
     if (!item) return NextResponse.json({ error: 'Не найдено' }, { status: 404 });
     return NextResponse.json({ success: true, item });
   } catch (err) {
@@ -32,10 +36,12 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const ok = deleteService(params.id);
+    const params = ('params' in context ? context.params : (context as any)) as any;
+    const resolvedParams = params instanceof Promise ? await params : params;
+    const ok = deleteService(resolvedParams.id);
     if (!ok) return NextResponse.json({ error: 'Не найдено' }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (err) {
